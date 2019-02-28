@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class InputParser {
-    
+
     private Scanner scanner = null;
 
     public InputParser(File in) {
@@ -22,8 +22,9 @@ public class InputParser {
     public List<Photo> parse() {
         List<Photo> res = new LinkedList<>();
         int numOfInput = scanner.nextInt();
+        nextLine();
         for(int i = 0; i < numOfInput; i++)
-            res.add(Photo.newInstance(nextLine()));
+            res.add(Photo.newInstance(nextLine(), i));
         return res;
 
     }

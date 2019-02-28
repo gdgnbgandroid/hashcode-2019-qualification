@@ -8,4 +8,5 @@ public class Slides implements Tagable {
     public Set<String> getTags() {
         return null;
     }
+
 }

@@ -36,4 +36,11 @@ public class SlidesShow {
     }
 
 
+    @Override
+    public String toString() {
+        StringBuilder strBuilder = new StringBuilder();
+        strBuilder.append(slides.size()).append("\n");
+        slides.forEach(s -> strBuilder.append(s).append("\n"));
+        return strBuilder.toString();
+    }
 }

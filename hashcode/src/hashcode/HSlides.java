@@ -14,4 +14,9 @@ public class HSlides extends Slides {
     public Set<String> getTags() {
         return photo.getTags();
     }
+
+    @Override
+    public String toString() {
+        return photo.getId() + "";
+    }
 }

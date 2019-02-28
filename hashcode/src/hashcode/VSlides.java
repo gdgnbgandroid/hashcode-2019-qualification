@@ -20,4 +20,9 @@ public class VSlides extends Slides {
         res.addAll(photo2.getTags());
         return res;
     }
+
+    @Override
+    public String toString() {
+        return photo1.getId() + " " + photo2.getId();
+    }
 }
