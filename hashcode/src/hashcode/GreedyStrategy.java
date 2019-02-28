@@ -27,7 +27,12 @@ public class GreedyStrategy {
                 .filter(p -> p instanceof VPhoto)
                 .map(p -> (VPhoto) p)
                 .collect(Collectors.toList());
+
+
+
         Collections.sort(vPhotoTemp, (o1, o2) -> o2.getTags().size() - o1.getTags().size());
+
+        vPhotoTemp = vPhotoTemp.subList(0, 10000);
 
         List<Slides> vPhotos = createVSlides(vPhotoTemp);
 
@@ -71,6 +76,7 @@ public class GreedyStrategy {
         Set<VPhoto> taken = new HashSet<>();
 
         while(taken.size() < size) {
+            System.out.println("v size:" + taken.size());
             VPhoto workingVp = null;
             int i = 0;
             for(i = 0; i < size; i++) {
