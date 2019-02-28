@@ -1,5 +1,6 @@
 package hashcode;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -20,7 +21,7 @@ public class SlidesShow {
     }
 
     private long calculateScore(Slides s1, Slides s2) {
-        Set<String> set1 = s1.getTags();
+        Set<String> set1 = new HashSet<>(s1.getTags());
         Set<String> set2 = s2.getTags();
         set1.retainAll(set2);
         int commonTagsNum = set1.size();

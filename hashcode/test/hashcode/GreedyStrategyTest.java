@@ -102,7 +102,7 @@ public class GreedyStrategyTest {
         saveResult(slidesShow.toString(), "e.out");
     }
 
-    private void saveResult(String fileName, String result) {
+    private void saveResult(String result, String fileName) {
         try {
             PrintWriter writer = new PrintWriter(fileName);
             writer.print(result);

@@ -23,9 +23,13 @@ public class GreedyStrategy {
 
         System.out.println("Size of H Photos: " + hPhotos.size());
 
-        //List<Photo> vPhotos = photoList.stream().filter(p -> p instanceof VPhoto).collect(Collectors.toList());
+        List<Slides> vPhotos = createVSlides(photoList.stream()
+                .filter(p -> p instanceof VPhoto)
+                .map(p -> (VPhoto) p)
+                .collect(Collectors.toList()));
 
-        Collections.sort(hPhotos, Comparator.comparingInt(o -> o.getTags().size()));
+
+        Collections.sort(hPhotos, (o1, o2) -> o2.getTags().size() - o1.getTags().size());
         //Collections.sort(vPhotos, Comparator.comparingInt(o -> o.getTags().size()));
 
         slidesShow.addSlides(hPhotos.get(0));
@@ -52,5 +56,35 @@ public class GreedyStrategy {
         }
 
         return slidesShow;
+    }
+
+    private List<Slides> createVSlides(List<VPhoto> photos) {
+        List<Slides> vSlides = new ArrayList<>();
+        final int size = photos.size();
+        Set<VPhoto> taken = new HashSet<>();
+
+        while(taken.size() < size) {
+            VPhoto workingVp = null;
+            int i = 0;
+            for(i = 0; i < size; i++) {
+                if(!taken.contains(photos.get(i))) {
+                    workingVp = photos.get(i);
+                    taken.add(workingVp);
+                    break;
+                }
+
+            }
+
+
+            long bestScore = -1;
+            int bestIdx = 0;
+            for(; i < size; i++) {
+                VPhoto vp = photos.get(i);
+
+
+            }
+        }
+
+        return vSlides;
     }
 }
