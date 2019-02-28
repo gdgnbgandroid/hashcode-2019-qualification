@@ -14,7 +14,7 @@ public class InputParserTest {
 
     @Before
     public void before() {
-        file = new File("resource/small.in");
+        file = new File("resource/example.in");
         parser = new InputParser(file);
     }
 
