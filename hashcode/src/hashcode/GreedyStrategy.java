@@ -21,16 +21,23 @@ public class GreedyStrategy {
                 .map(photo -> new HSlides((HPhoto) photo))
                 .collect(Collectors.toList());
 
-        System.out.println("Size of H Photos: " + hPhotos.size());
 
-        List<Slides> vPhotos = createVSlides(photoList.stream()
+
+        List<VPhoto> vPhotoTemp = photoList.stream()
                 .filter(p -> p instanceof VPhoto)
                 .map(p -> (VPhoto) p)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
+        Collections.sort(vPhotoTemp, (o1, o2) -> o2.getTags().size() - o1.getTags().size());
 
+        List<Slides> vPhotos = createVSlides(vPhotoTemp);
 
+        hPhotos.addAll(vPhotos);
+
+        System.out.println("Finish creating V slide " + vPhotos.size());
         Collections.sort(hPhotos, (o1, o2) -> o2.getTags().size() - o1.getTags().size());
         //Collections.sort(vPhotos, Comparator.comparingInt(o -> o.getTags().size()));
+
+        System.out.println("Size of H Photos: " + hPhotos.size());
 
         slidesShow.addSlides(hPhotos.get(0));
         final int size = hPhotos.size();
@@ -76,13 +83,23 @@ public class GreedyStrategy {
             }
 
 
-            long bestScore = -1;
+            long bestScore = Long.MAX_VALUE;
             int bestIdx = 0;
             for(; i < size; i++) {
-                VPhoto vp = photos.get(i);
-
-
+                if(!taken.contains(photos.get(i))) {
+                    VPhoto vp = photos.get(i);
+                    Set<String> set1 = new HashSet<>(workingVp.getTags());
+                    set1.retainAll(vp.getTags());
+                    if (set1.size() < bestScore) {
+                        bestScore = set1.size();
+                        bestIdx = i;
+                    }
+                }
             }
+
+            taken.add(photos.get(bestIdx));
+            vSlides.add(new VSlides(workingVp, photos.get(bestIdx)));
+
         }
 
         return vSlides;
